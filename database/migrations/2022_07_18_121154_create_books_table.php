@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('series_id')->constrained()->onDelete('cascade');
+            $table->foreignId('series_id')->nullable()->default(NULL)->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->float('score', 2, 1);
+            $table->tinyInteger('score'); 
             $table->smallInteger('year');
             $table->tinyInteger('part');
             $table->text('annotation');
