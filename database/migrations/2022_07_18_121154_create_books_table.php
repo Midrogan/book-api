@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->tinyInteger('score'); 
             $table->smallInteger('year');
-            $table->tinyInteger('part');
+            $table->tinyInteger('part')->nullable()->default(NULL);
             $table->text('annotation');
             $table->timestamps();
         });

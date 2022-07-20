@@ -10,8 +10,6 @@ class Series extends Model
 {
     use HasFactory;
 
-    protected $table = 'series';
-
     /**
      * Get all of the books for the Series
      *

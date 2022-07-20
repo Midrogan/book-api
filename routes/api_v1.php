@@ -3,6 +3,7 @@
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\BookController;
+use App\Http\Controllers\Api\V1\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,5 @@ use App\Http\Controllers\Api\v1\BookController;
 
 Route::apiResources([
     'books' => BookController::class,
+    'authors' => AuthorController::class,
 ]);

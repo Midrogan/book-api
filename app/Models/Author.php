@@ -10,6 +10,13 @@ class Author extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'year',
+        'biography',
+    ];
+
     /**
      * The books that belong to the author
      *

@@ -24,12 +24,14 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreBookRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBookRequest $request)
     {
         $book = Book::create($request->validated());
+
+        $book->authors()->attach($request->authors);
 
         return new BookResource($book);
     }
@@ -37,7 +39,7 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function show(Book $book)
@@ -48,13 +50,15 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\UpdateBookRequest  $request
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
         $book->update($request->validated());
+
+        $book->authors()->sync($request->authors);
 
         return new BookResource($book);
     }
@@ -62,7 +66,7 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function destroy(Book $book)

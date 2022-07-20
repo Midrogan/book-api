@@ -26,10 +26,12 @@ class StoreBookRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'series_id' => '',
-            'score' => 'required|max:2',
+            'score' => 'required|max:3',
             'year' => 'required|max:4',
-            'part' => 'required|max:3',
+            'part' => 'max:3',
             'annotation' => 'required',
+            'authors' => 'array',
+            'authors.*' => 'integer|distinct|exists:authors,id',
         ];
     }
 }
