@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Tag;
+use App\Http\Resources\TagResource;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 
@@ -16,7 +17,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return TagResousce::collection(Tag::all());
     }
 
     /**
@@ -27,7 +28,9 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        $tag = Tag::create($request->validated());
+
+        return new TagResource($tag);
     }
 
     /**
@@ -38,7 +41,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        return new TagResource($tag);
     }
 
     /**
@@ -50,7 +53,9 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $tag->update($request->validated());
+
+        return TagResource($tag);
     }
 
     /**
@@ -61,6 +66,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return response()->json(NULL, 204);
     }
 }

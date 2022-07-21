@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Genre;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\GenreResource;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 
@@ -16,7 +17,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        return GenreResource::collection(Genre::all());
     }
 
     /**
@@ -27,7 +28,9 @@ class GenreController extends Controller
      */
     public function store(StoreGenreRequest $request)
     {
-        //
+        $genre = Genre::create($request->validated());
+
+        return new GenreResource($genre);
     }
 
     /**
@@ -38,7 +41,7 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        return new GenreResource($genre);
     }
 
     /**
@@ -50,7 +53,9 @@ class GenreController extends Controller
      */
     public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        //
+        $genre->update($request->validated());
+
+        return new GenreResource($genre);
     }
 
     /**
@@ -61,6 +66,8 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        $genre->delete();
+
+        return response()->json(NULL, 204);
     }
 }

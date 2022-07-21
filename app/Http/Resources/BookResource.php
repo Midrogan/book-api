@@ -20,8 +20,8 @@ class BookResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'series' => $this->series,
-            // 'series' => SeriesResource::make($this->series),
+            // 'series' => $this->series,
+            'series' => SeriesResource::make($this->series),
             'name' => $this->name,
             'score' => $this->score,
             'year' => $this->year,

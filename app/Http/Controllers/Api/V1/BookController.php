@@ -32,6 +32,8 @@ class BookController extends Controller
         $book = Book::create($request->validated());
 
         $book->authors()->attach($request->authors);
+        $book->genres()->attach($request->genres);
+        $book->tags()->attach($request->tags);
 
         return new BookResource($book);
     }
@@ -59,6 +61,8 @@ class BookController extends Controller
         $book->update($request->validated());
 
         $book->authors()->sync($request->authors);
+        $book->genres()->sync($request->genres);
+        $book->tags()->sync($request->tags);
 
         return new BookResource($book);
     }

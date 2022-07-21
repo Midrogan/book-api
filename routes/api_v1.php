@@ -2,8 +2,11 @@
 
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\TagController;
 use App\Http\Controllers\Api\v1\BookController;
+use App\Http\Controllers\Api\V1\GenreController;
 use App\Http\Controllers\Api\V1\AuthorController;
+use App\Http\Controllers\Api\V1\SeriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +26,7 @@ use App\Http\Controllers\Api\V1\AuthorController;
 Route::apiResources([
     'books' => BookController::class,
     'authors' => AuthorController::class,
+    'genres' => GenreController::class,
+    'tags' => TagController::class,
+    'series' => SeriesController::class,
 ]);

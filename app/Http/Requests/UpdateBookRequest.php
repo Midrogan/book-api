@@ -24,14 +24,18 @@ class UpdateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'series_id' => '',
-            'score' => 'required|max:3',
-            'year' => 'required|max:4',
-            'part' => 'max:3',
-            'annotation' => 'required',
+            'name' => 'required|string|max:255',
+            'series_id' => 'integer|exists:series,id',
+            'score' => 'required|integer|max:100',
+            'year' => 'required|integer|digits:4',
+            'part' => 'integer|max:1000',
+            'annotation' => 'required|string',
             'authors' => 'array',
             'authors.*' => 'integer|distinct|exists:authors,id',
+            'tags' => 'array',
+            'tags.*' => 'integer|distinct|exists:tags,id',
+            'genres' => 'array',
+            'genres.*' => 'integer|distinct|exists:genres,id',
         ];
     }
 }
