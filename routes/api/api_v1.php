@@ -2,6 +2,7 @@
 
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\v1\TagController;
 use App\Http\Controllers\Api\v1\BookController;
 use App\Http\Controllers\Api\V1\GenreController;
@@ -22,11 +23,16 @@ use App\Http\Controllers\Api\V1\SeriesController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::apiResources([
-    'books' => BookController::class,
-    'authors' => AuthorController::class,
-    'genres' => GenreController::class,
-    'tags' => TagController::class,
-    'series' => SeriesController::class,
-]);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::apiResources([
+        'books' => BookController::class,
+        'authors' => AuthorController::class,
+        'genres' => GenreController::class,
+        'tags' => TagController::class,
+        'series' => SeriesController::class,
+    ]);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
